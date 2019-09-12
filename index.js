@@ -27,7 +27,15 @@ function sendUpdate(desired) {
 // When we start, tell the backend we are live, subscribe to the shadow
 thingShadows.on('connect', () => {
   thingShadows.register(clientName, {}, () => {
-    sendUpdate({ 'queue': [] })
+    sendUpdate({ 'queue': [
+      {
+        'orderId': 1234,
+        'name': 'Screwdriver',
+        'ingredients': [
+          'oj', 'vodka'
+        ]
+      }
+    ] })
   })
 })
 
@@ -38,18 +46,18 @@ thingShadows.on('status', (thingName, status, _clientToken, stateObject) => {
   // Use logic when a clean request and a state is desired
   if (status === 'accepted' && stateObject && stateObject.state) {
     const state = stateObject.state.desired;
-    console.log('inside accepted; state is: ' + state)
+    console.log('inside accepted; state is: ' + JSON.stringify(state))
 
     // Handle a queued order
     if (state && state.queue && state.queue.length > 0) {
       const { queue } = state
 
-      console.log('inside queue breaker, queue is: ' + queue)
+      console.log('inside queue breaker, queue has: ' + queue.length)
       const order = queue.shift()
 
       // Handle pour logic
       console.log('pouring: ' + JSON.stringify(order))
-      console.log('updating queue, new queue: ' + queue)
+      console.log('updating queue, new queue: ' + JSON.stringify(queue))
 
       // Save the queue after removing one
       sendUpdate({ 'queue': queue })
