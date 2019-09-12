@@ -17,7 +17,7 @@ thingShadows.on('connect', () => {
     const clientTokenUpdate = thingShadows.update(clientName, {
       'state': {
         'desired': {
-          'online': true
+          'queue': []
         }
       }
     })
@@ -30,14 +30,14 @@ thingShadows.on('connect', () => {
 })
 
 // Status events
-thingShadows.on('status', (thingName, stat, clientToken, stateObject) => {
-  console.log('received ' + stat + ' on ' + thingName + ', ' + clientToken + ': ' + JSON.stringify(stateObject))
+thingShadows.on('status', (thingName, stat, _clientToken, stateObject) => {
+  console.log('received ' + stat + ' on ' + thingName + ': ' + JSON.stringify(stateObject))
 })
 
 // Delta events
-thingShadows.on('delta', (thingName, stateObject) => {
-  console.log('received delta on ' + thingName + ': '+ JSON.stringify(stateObject))
-})
+// thingShadows.on('delta', (thingName, stateObject) => {
+//   console.log('received delta on ' + thingName + ': '+ JSON.stringify(stateObject))
+// })
 
 // Timeout events
 thingShadows.on('timeout', (thingName, clientToken) => {
