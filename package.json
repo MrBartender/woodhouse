@@ -1,0 +1,19 @@
+{
+  "name": "woodhouse",
+  "version": "1.0.0",
+  "description": "Mr Bartender V1 - AWS IoT",
+  "main": "index.js",
+  "dependencies": {
+    "aws-iot-device-sdk": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrBartender/woodhouse.git"
+  },
+  "author": "Jake Mitchell <jake@jakemitchell.xyz>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrBartender/woodhouse/issues"
+  },
+  "homepage": "https://github.com/MrBartender/woodhouse#readme"
+}
