@@ -11,27 +11,27 @@ const thingShadows = awsIot.thingShadow({
   host: 'a2deqfzrx988q4-ats.iot.us-west-2.amazonaws.com'
 })
 
-// When we start, tell the backend we are live
+// When we start, tell the backend we are live, subscribe to the shadow
 thingShadows.on('connect', () => {
-    thingShadows.register(clientName, {}, () => {
-      const clientTokenUpdate = thingShadows.update(clientName, {
-        'state': {
-          'desired': {
-            'online': true
-          }
+  thingShadows.register(clientName, {}, () => {
+    const clientTokenUpdate = thingShadows.update(clientName, {
+      'state': {
+        'desired': {
+          'online': true
         }
-      })
-
-      // If null, the shadow is currently updating and should try again
-      if (clientTokenUpdate === null) {
-        console.log('update shadow failed, operation still in progress');
       }
     })
+
+    // If null, the shadow is currently updating and should try again
+    if (clientTokenUpdate === null) {
+      console.log('update shadow failed, operation still in progress');
+    }
+  })
 })
 
 // Status events
 thingShadows.on('status', (thingName, stat, clientToken, stateObject) => {
-  console.log('received ' + stat + ' on ' + thingName + ': ' + JSON.stringify(stateObject))
+  console.log('received ' + stat + ' on ' + thingName + ', clientToken: ' + JSON.stringify(stateObject))
 })
 
 // Delta events
