@@ -36,8 +36,8 @@ thingShadows.on('status', (thingName, status, _clientToken, stateObject) => {
   console.log('received ' + status + ' on ' + thingName + ': ' + JSON.stringify(stateObject))
 
   // Use logic when a clean request and a state is desired
-  if (status === 'accepted' && stateObject && stateObject.desired) {
-    const state = stateObject.desired.state;
+  if (status === 'accepted' && stateObject && stateObject.state) {
+    const state = stateObject.state.desired;
     console.log('inside accepted; state is: ' + state)
 
     // Handle a queued order
