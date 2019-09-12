@@ -1,19 +1,19 @@
 const awsIot = require('aws-iot-device-sdk')
 const path = require('path')
-const clientName = 'Woodhouse1'
+const license = require('./certs/license')
 
 // Initialize the IoT MQTT client
 const thingShadows = awsIot.thingShadow({
   keyPath: path.resolve('.', 'certs/node-private-key.pem'),
   certPath: path.resolve('.', 'certs/node-cert.pem'),
   caPath: path.resolve('.', 'certs/Amazon_Root_CA_1.pem'),
-  clientId: clientName,
-  host: 'a2deqfzrx988q4-ats.iot.us-west-2.amazonaws.com'
+  clientId: license.deviceName,
+  host: license.host
 })
 
 // Helper function to send updates and flag errors
 function sendUpdate(desired) {
-  const clientTokenUpdate = thingShadows.update(clientName, {
+  const clientTokenUpdate = thingShadows.update(license.deviceName, {
     'state': {
       'desired': desired
     }
@@ -26,7 +26,7 @@ function sendUpdate(desired) {
 }
 // When we start, tell the backend we are live, subscribe to the shadow
 thingShadows.on('connect', () => {
-  thingShadows.register(clientName, {}, () => {
+  thingShadows.register(license.deviceName, {}, () => {
     sendUpdate({ 'queue': [
       {
         'orderId': 1234,
