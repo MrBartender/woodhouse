@@ -31,7 +31,7 @@ thingShadows.on('connect', () => {
 
 // Status events
 thingShadows.on('status', (thingName, stat, clientToken, stateObject) => {
-  console.log('received ' + stat + ' on ' + thingName + ', clientToken: ' + JSON.stringify(stateObject))
+  console.log('received ' + stat + ' on ' + thingName + ', ' + clientToken + ': ' + JSON.stringify(stateObject))
 })
 
 // Delta events
