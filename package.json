@@ -4,7 +4,7 @@
   "description": "Mr Bartender V1 - AWS IoT",
   "main": "index.js",
   "dependencies": {
-    "aws-iot-device-sdk": "^2.2.1"
+    "aws-iot-device-sdk": "^2.2.12"
   },
   "repository": {
     "type": "git",
